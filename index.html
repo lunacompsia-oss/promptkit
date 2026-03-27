@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptKit — Premium AI Coding Prompt Library for Claude Code, Cursor & Copilot</title>
+  <meta name="description" content="Curated CLAUDE.md templates, .cursorrules files, workflow recipes, and prompt collections. Ship better code with AI coding tools.">
+  <meta name="keywords" content="AI coding prompts, CLAUDE.md templates, cursor rules, cursorrules, AI coding assistant, Claude Code, Cursor, GitHub Copilot, prompt engineering, developer tools">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PromptKit — Premium AI Coding Prompt Library">
+  <meta property="og:description" content="Curated CLAUDE.md templates, .cursorrules files, workflow recipes. Ship better code with AI coding tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://promptkit.dev">
+  <meta property="og:image" content="https://promptkit.dev/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PromptKit — Premium AI Coding Prompt Library">
+  <meta name="twitter:description" content="Curated CLAUDE.md templates, .cursorrules files, workflow recipes. Ship better code with AI.">
+
+  <!-- Favicon: code bracket icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230f172a'/><text x='50' y='68' font-size='52' font-family='monospace' font-weight='bold' fill='%2306b6d4' text-anchor='middle'>&lt;/&gt;</text></svg>">
+
+  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0b1121;
+      --bg-secondary: #111827;
+      --bg-card: #1a2332;
+      --bg-card-hover: #1e293b;
+      --accent: #06b6d4;
+      --accent-light: #22d3ee;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --accent-blue: #3b82f6;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #1e293b;
+      --border-accent: rgba(6, 182, 212, 0.3);
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- Layout ---- */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 96px 0; }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11, 17, 33, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1120px; margin: 0 auto; padding: 16px 24px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.25rem; color: var(--text-primary);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      background: var(--accent) !important; color: var(--bg-primary) !important;
+      padding: 8px 20px !important; border-radius: 8px; font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.9; }
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
+
+    /* ---- Hero ---- */
+    .hero { padding: 160px 0 96px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(ellipse, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-glow); border: 1px solid var(--border-accent);
+      padding: 6px 16px; border-radius: 999px; font-size: 0.85rem;
+      color: var(--accent-light); margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800;
+      line-height: 1.1; margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem; color: var(--text-secondary); max-width: 640px;
+      margin: 0 auto 40px; line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 10px; font-weight: 600;
+      font-size: 1rem; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-blue) 100%);
+      color: #fff; box-shadow: 0 4px 24px rgba(6, 182, 212, 0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 4px 32px rgba(6, 182, 212, 0.5); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border); padding: 14px 32px;
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); }
+    .hero-stats {
+      display: flex; gap: 48px; justify-content: center; margin-top: 64px;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-light); }
+    .hero-stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ---- Section Headers ---- */
+    .section-label {
+      text-transform: uppercase; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 2px; color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1.1rem; color: var(--text-secondary); max-width: 600px;
+    }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-header .section-subtitle { margin: 0 auto; }
+
+    /* ---- Problem / Solution ---- */
+    .problem { background: var(--bg-secondary); }
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .problem-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .problem-list li {
+      display: flex; gap: 14px; font-size: 1.05rem; color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .problem-icon { flex-shrink: 0; font-size: 1.3rem; margin-top: 2px; }
+    .problem-list li strong { color: var(--text-primary); }
+    .solution-card {
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: var(--radius); padding: 40px; position: relative; overflow: hidden;
+    }
+    .solution-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+    }
+    .solution-card h3 { font-size: 1.5rem; margin-bottom: 16px; }
+    .solution-card p { color: var(--text-secondary); margin-bottom: 20px; }
+    .solution-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .solution-features li {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text-secondary); font-size: 0.95rem;
+    }
+    .check { color: var(--accent); font-weight: bold; }
+
+    /* ---- What's Included ---- */
+    .included-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .included-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .included-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .included-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--accent-glow); display: flex; align-items: center;
+      justify-content: center; font-size: 1.4rem; margin-bottom: 20px;
+    }
+    .included-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .included-card p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; }
+    .included-count {
+      display: inline-block; background: var(--accent-glow); color: var(--accent-light);
+      font-size: 0.75rem; font-weight: 700; padding: 2px 10px;
+      border-radius: 999px; margin-top: 12px;
+    }
+
+    /* ---- Preview Section ---- */
+    .preview { background: var(--bg-secondary); }
+    .preview-tabs {
+      display: flex; gap: 4px; margin-bottom: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .preview-tab {
+      background: none; border: none; color: var(--text-muted);
+      padding: 12px 20px; cursor: pointer; font-family: var(--mono);
+      font-size: 0.85rem; border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .preview-tab:hover { color: var(--text-secondary); }
+    .preview-tab.active { color: var(--accent-light); border-bottom-color: var(--accent); }
+    .preview-window {
+      background: #0d1117; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; max-width: 860px; margin: 0 auto;
+    }
+    .preview-header {
+      display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+      background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+    }
+    .preview-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+    .preview-dot-red { background: #ff5f57; }
+    .preview-dot-yellow { background: #febc2e; }
+    .preview-dot-green { background: #28c840; }
+    .preview-filename {
+      margin-left: 12px; font-family: var(--mono); font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .preview-content {
+      padding: 0; display: none; overflow-x: auto;
+    }
+    .preview-content.active { display: block; }
+    .preview-content pre {
+      margin: 0; padding: 24px; font-family: var(--mono);
+      font-size: 0.82rem; line-height: 1.7; color: var(--text-secondary);
+      white-space: pre; overflow-x: auto;
+    }
+    .preview-content .comment { color: #6a737d; }
+    .preview-content .keyword { color: #ff7b72; }
+    .preview-content .string { color: #a5d6ff; }
+    .preview-content .heading { color: var(--accent-light); font-weight: bold; }
+    .preview-content .value { color: #7ee787; }
+    .preview-badge {
+      text-align: center; margin-top: 24px; color: var(--text-muted); font-size: 0.85rem;
+    }
+
+    /* ---- Social Proof ---- */
+    .social-proof {
+      padding: 64px 0;
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+    .proof-card {
+      max-width: 720px; margin: 0 auto; text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: var(--radius); padding: 48px;
+    }
+    .proof-card p {
+      font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;
+    }
+    .proof-card strong { color: var(--text-primary); }
+    .proof-agents {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
+    }
+    .proof-agent-tag {
+      background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.15);
+      padding: 4px 12px; border-radius: 999px; font-size: 0.75rem;
+      color: var(--accent-light); font-family: var(--mono);
+    }
+
+    /* ---- Pricing ---- */
+    .pricing { background: var(--bg-secondary); }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 40px 32px;
+      transition: transform 0.2s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.popular {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.12);
+      position: relative;
+    }
+    .pricing-card.popular::before {
+      content: 'MOST POPULAR'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+      padding: 4px 16px; border-radius: 999px;
+    }
+    .pricing-tier {
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px;
+    }
+    .pricing-price { font-size: 3rem; font-weight: 800; margin-bottom: 4px; }
+    .pricing-price sup { font-size: 1.2rem; vertical-align: super; color: var(--text-muted); }
+    .pricing-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+    .pricing-features { list-style: none; margin-bottom: 32px; }
+    .pricing-features li {
+      padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem;
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '\2713'; color: var(--accent); font-weight: bold; flex-shrink: 0;
+    }
+    .pricing-btn {
+      display: block; width: 100%; padding: 14px; text-align: center;
+      border-radius: 10px; font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .pricing-btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      color: #fff; box-shadow: 0 4px 24px rgba(6, 182, 212, 0.3);
+    }
+    .pricing-btn-primary:hover { box-shadow: 0 4px 32px rgba(6, 182, 212, 0.5); }
+    .pricing-btn-secondary {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .pricing-btn-secondary:hover { border-color: var(--text-muted); }
+    .pricing-note {
+      text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 0.85rem;
+    }
+
+    /* ---- FAQ ---- */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border); padding: 24px 0;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; width: 100%; background: none; border: none;
+      color: var(--text-primary); font-size: 1.05rem; font-weight: 600;
+      text-align: left; font-family: var(--font); padding: 0;
+    }
+    .faq-arrow {
+      font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s;
+      flex-shrink: 0; margin-left: 16px;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-top: 16px; }
+
+    /* ---- Footer ---- */
+    footer {
+      padding: 48px 0; border-top: 1px solid var(--border);
+      text-align: center; color: var(--text-muted); font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 60px; left: 0; right: 0; background: var(--bg-primary);
+        padding: 24px; gap: 16px; border-bottom: 1px solid var(--border);
+      }
+      .nav-mobile-toggle { display: block; font-size: 1.5rem; }
+      .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .included-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .hero-stats { gap: 32px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span>&lt;/&gt;</span> PromptKit</a>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="#included">What's Included</a>
+      <a href="#preview">Preview</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pricing" class="nav-cta">Get PromptKit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">New: Claude Code CLAUDE.md templates for 2026</div>
+    <h1>Stop Guessing.<br>Start Prompting Like a Pro.</h1>
+    <p>Premium CLAUDE.md templates, .cursorrules files, and workflow recipes that turn AI coding tools into 10x multipliers. Built by developers who run an entire company with AI agents.</p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn btn-primary">Get PromptKit &mdash; from $19</a>
+      <a href="#preview" class="btn btn-secondary">See Sample Prompts</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-number">50+</div>
+        <div class="hero-stat-label">Prompt Templates</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">12</div>
+        <div class="hero-stat-label">CLAUDE.md Configs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">8</div>
+        <div class="hero-stat-label">Workflow Recipes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem / Solution -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">AI coding tools are powerful.<br>Without good prompts, they waste your time.</h2>
+        <ul class="problem-list">
+          <li>
+            <span class="problem-icon">&#10060;</span>
+            <span><strong>Vague outputs</strong> &mdash; You ask Claude to refactor, it rewrites everything. You ask Cursor for a component, it ignores your conventions.</span>
+          </li>
+          <li>
+            <span class="problem-icon">&#10060;</span>
+            <span><strong>Configuration black hole</strong> &mdash; Hours spent tweaking CLAUDE.md or .cursorrules with no idea what actually works.</span>
+          </li>
+          <li>
+            <span class="problem-icon">&#10060;</span>
+            <span><strong>No system</strong> &mdash; Every prompt is one-off. No reusable patterns, no compounding knowledge.</span>
+          </li>
+          <li>
+            <span class="problem-icon">&#10060;</span>
+            <span><strong>Tribal knowledge</strong> &mdash; The best prompt patterns live in scattered blog posts and Twitter threads you will never find.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="solution-card">
+        <h3>PromptKit is the system you need.</h3>
+        <p>Battle-tested prompt templates, configuration files, and workflows distilled from running a 14-agent AI company.</p>
+        <ul class="solution-features">
+          <li><span class="check">&#10003;</span> Drop-in CLAUDE.md files tuned for real project types</li>
+          <li><span class="check">&#10003;</span> .cursorrules that enforce your conventions automatically</li>
+          <li><span class="check">&#10003;</span> Workflow recipes: debug, refactor, test, review, deploy</li>
+          <li><span class="check">&#10003;</span> Copy, paste, ship &mdash; no prompt engineering required</li>
+          <li><span class="check">&#10003;</span> Lifetime updates as AI tools evolve</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section id="included">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">What's Inside</div>
+      <h2 class="section-title">Everything You Need to Master AI Coding</h2>
+      <p class="section-subtitle">Organized, documented, and ready to use in your projects today.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">&#128196;</div>
+        <h3>CLAUDE.md Templates</h3>
+        <p>Complete system instructions for SaaS apps, CLI tools, API services, monorepos, and more. Each one tested across hundreds of sessions.</p>
+        <span class="included-count">12 templates</span>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">&#9881;</div>
+        <h3>.cursorrules Files</h3>
+        <p>Pre-configured rules for React, Next.js, Rails, Python, Go, and TypeScript projects. Your AI follows your patterns, not its own.</p>
+        <span class="included-count">10 rulesets</span>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">&#9889;</div>
+        <h3>Workflow Recipes</h3>
+        <p>Step-by-step prompt sequences for debugging, refactoring, writing tests, code review, and feature implementation.</p>
+        <span class="included-count">8 workflows</span>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">&#128218;</div>
+        <h3>Prompt Collections</h3>
+        <p>50+ individual prompts organized by task: architecture, debugging, performance, security, documentation, and deployment.</p>
+        <span class="included-count">50+ prompts</span>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">&#128203;</div>
+        <h3>Cheat Sheets</h3>
+        <p>Quick-reference cards for Claude Code commands, Cursor shortcuts, and Copilot patterns. Print them or pin them.</p>
+        <span class="included-count">6 sheets</span>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">&#128640;</div>
+        <h3>Lifetime Updates</h3>
+        <p>AI tools change fast. Your purchase includes every future update as we add new templates, prompts, and workflows.</p>
+        <span class="included-count">Pro &amp; Team</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Preview -->
+<section class="preview" id="preview">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">See It In Action</div>
+      <h2 class="section-title">Real Prompts. Real Results.</h2>
+      <p class="section-subtitle">These are actual snippets from PromptKit. Copy them, try them, see the difference.</p>
+    </div>
+    <div class="preview-window">
+      <div class="preview-header">
+        <span class="preview-dot preview-dot-red"></span>
+        <span class="preview-dot preview-dot-yellow"></span>
+        <span class="preview-dot preview-dot-green"></span>
+        <span class="preview-filename" id="preview-filename">CLAUDE.md</span>
+      </div>
+      <div class="preview-tabs">
+        <button class="preview-tab active" data-tab="0">CLAUDE.md</button>
+        <button class="preview-tab" data-tab="1">.cursorrules</button>
+        <button class="preview-tab" data-tab="2">Workflow</button>
+      </div>
+      <div class="preview-content active" data-tab="0">
+        <pre><span class="heading"># Project: SaaS Application</span>
+
+<span class="heading">## Role</span>
+<span class="comment">You are a senior full-stack engineer working on a production SaaS</span>
+<span class="comment">application. You write clean, maintainable code that ships fast.</span>
+
+<span class="heading">## Architecture</span>
+<span class="keyword">- Framework:</span> <span class="value">Next.js 15 (App Router)</span>
+<span class="keyword">- Database:</span> <span class="value">PostgreSQL via Drizzle ORM</span>
+<span class="keyword">- Auth:</span> <span class="value">Better Auth with session tokens</span>
+<span class="keyword">- Payments:</span> <span class="value">Stripe (checkout + webhooks)</span>
+<span class="keyword">- Styling:</span> <span class="value">Tailwind CSS v4 + shadcn/ui</span>
+
+<span class="heading">## Code Rules (Non-Negotiable)</span>
+1. <span class="keyword">Server Components by default.</span> Only add "use client"
+   when you need interactivity or browser APIs.
+2. <span class="keyword">No any types.</span> Every function has explicit return types.
+   Use Zod schemas for runtime validation.
+3. <span class="keyword">Colocate related code.</span> Feature folders, not layer folders.
+   <span class="value">/app/dashboard/</span> contains its components, actions, and types.
+4. <span class="keyword">Error handling is mandatory.</span> Every server action returns
+   <span class="value">{ success: boolean; data?: T; error?: string }</span>
+5. <span class="keyword">No magic strings.</span> Constants go in <span class="value">lib/constants.ts</span>.
+   Env vars are validated in <span class="value">lib/env.ts</span> at build time.
+
+<span class="heading">## Before Every Change</span>
+<span class="comment">- Read the existing code in the file before modifying it</span>
+<span class="comment">- Preserve existing patterns and naming conventions</span>
+<span class="comment">- Run `pnpm typecheck` mentally — do not introduce type errors</span>
+<span class="comment">- If a change touches &gt;3 files, explain the plan first</span></pre>
+      </div>
+      <div class="preview-content" data-tab="1">
+        <pre><span class="heading"># .cursorrules — React + TypeScript Project</span>
+
+<span class="heading">## General</span>
+<span class="comment">You are an expert React and TypeScript developer.</span>
+<span class="comment">You write concise, readable code. You never over-engineer.</span>
+
+<span class="heading">## Component Patterns</span>
+<span class="keyword">- Always use</span> <span class="value">function declarations</span>, not arrow functions,
+  for components: <span class="value">function Button() {}</span> not <span class="value">const Button = () =&gt; {}</span>
+<span class="keyword">- Props interface</span> lives in the same file, directly above
+  the component. Name it <span class="value">{Component}Props</span>.
+<span class="keyword">- Prefer composition</span> over conditional rendering.
+  If a component has 3+ conditionals, split it.
+<span class="keyword">- Use early returns</span> for loading/error states at the top
+  of the component body.
+
+<span class="heading">## State Management</span>
+<span class="keyword">- Local state first.</span> <span class="value">useState</span> and <span class="value">useReducer</span> solve 90% of cases.
+<span class="keyword">- URL state for filters,</span> pagination, and search.
+  Use <span class="value">nuqs</span> or <span class="value">useSearchParams</span>.
+<span class="keyword">- Server state via</span> <span class="value">@tanstack/react-query</span>. Never fetch in useEffect.
+<span class="keyword">- Global state is a last resort.</span> If you reach for Zustand,
+  explain why local state is insufficient.
+
+<span class="heading">## File Naming</span>
+<span class="keyword">- Components:</span> <span class="value">PascalCase.tsx</span>
+<span class="keyword">- Utilities:</span> <span class="value">kebab-case.ts</span>
+<span class="keyword">- Hooks:</span> <span class="value">use-kebab-case.ts</span>
+<span class="keyword">- Types:</span> <span class="value">kebab-case.types.ts</span> (colocated) or <span class="value">types/</span> (shared)</pre>
+      </div>
+      <div class="preview-content" data-tab="2">
+        <pre><span class="heading"># Workflow: Debug a Production Bug</span>
+
+<span class="heading">## Step 1 — Reproduce</span>
+<span class="string">Prompt:</span> "I'm seeing [error] in production. Here is the error log:
+[paste log]. Reproduce this locally. Tell me the exact steps
+and which file likely contains the bug. Do not fix it yet."
+
+<span class="heading">## Step 2 — Root Cause</span>
+<span class="string">Prompt:</span> "You identified [file] as the likely source. Trace the
+execution path from [entry point] to the error. Show me the
+exact line where the assumption breaks. Explain why it worked
+before and what changed."
+
+<span class="heading">## Step 3 — Fix with Test</span>
+<span class="string">Prompt:</span> "Write the minimal fix for this bug. Then write a
+regression test that would have caught it. The test should:
+1. Reproduce the original failure
+2. Verify the fix works
+3. Cover the edge case that caused it"
+
+<span class="heading">## Step 4 — Verify</span>
+<span class="string">Prompt:</span> "Run the test suite. If anything else breaks, it means
+our fix has side effects — identify them and adjust. Give me
+the final diff and a one-line commit message."
+
+<span class="comment">// Why this works: Each step constrains the AI's scope.</span>
+<span class="comment">// Step 1 prevents premature fixing. Step 2 forces understanding.</span>
+<span class="comment">// Step 3 ensures quality. Step 4 catches regressions.</span></pre>
+      </div>
+    </div>
+    <p class="preview-badge">These are 3 of 50+ templates and prompts included in PromptKit.</p>
+  </div>
+</section>
+
+<!-- Social Proof -->
+<section class="social-proof">
+  <div class="container">
+    <div class="proof-card">
+      <div class="section-label">Why Trust Us</div>
+      <h3 style="font-size: 1.5rem; margin: 12px 0 20px;">Built by a team that runs a 14-agent AI company.</h3>
+      <p>We do not just write about AI coding tools &mdash; we operate an <strong>entire autonomous company</strong> powered by 14 specialized AI agents. Every template in PromptKit has been refined through thousands of real coding sessions. We know what works because we use it every single day to ship real products.</p>
+      <div class="proof-agents">
+        <span class="proof-agent-tag">ceo-bezos</span>
+        <span class="proof-agent-tag">cto-vogels</span>
+        <span class="proof-agent-tag">fullstack-dhh</span>
+        <span class="proof-agent-tag">qa-bach</span>
+        <span class="proof-agent-tag">devops-hightower</span>
+        <span class="proof-agent-tag">research-thompson</span>
+        <span class="proof-agent-tag">product-norman</span>
+        <span class="proof-agent-tag">+7 more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">One Purchase. No Subscriptions.</h2>
+      <p class="section-subtitle">Pay once, use forever. Every plan includes instant access to all files via download.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price"><sup>$</sup>19</div>
+        <div class="pricing-desc">Perfect for getting started</div>
+        <ul class="pricing-features">
+          <li>Core prompt collection (20+ prompts)</li>
+          <li>2 CLAUDE.md templates (SaaS + API)</li>
+          <li>2 .cursorrules files</li>
+          <li>Quick-reference cheat sheets</li>
+          <li>Markdown + plain text formats</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-secondary lemonsqueezy-button">Get Starter</a>
+      </div>
+      <!-- Pro -->
+      <div class="pricing-card popular">
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price"><sup>$</sup>39</div>
+        <div class="pricing-desc">Everything you need to go pro</div>
+        <ul class="pricing-features">
+          <li>All 50+ prompts and collections</li>
+          <li>All 12 CLAUDE.md templates</li>
+          <li>All 10 .cursorrules rulesets</li>
+          <li>8 workflow recipes (debug, refactor, test...)</li>
+          <li>All 6 cheat sheets</li>
+          <li>Lifetime updates included</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-primary lemonsqueezy-button">Get Pro</a>
+      </div>
+      <!-- Team -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Team</div>
+        <div class="pricing-price"><sup>$</sup>99</div>
+        <div class="pricing-desc">For teams up to 10 developers</div>
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>Team license for up to 10 developers</li>
+          <li>Team onboarding guide</li>
+          <li>Shared team .cursorrules template</li>
+          <li>Priority access to new content</li>
+          <li>Lifetime updates included</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-secondary lemonsqueezy-button">Get Team</a>
+      </div>
+    </div>
+    <p class="pricing-note">Secure payment via LemonSqueezy. Instant download after purchase. 30-day money-back guarantee.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          What format are the files in?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">Everything is in plain Markdown (.md) and text files. CLAUDE.md files are ready to drop into your project root. .cursorrules files go into your Cursor project. No special tooling required &mdash; just copy and paste.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Which AI tools do these work with?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">PromptKit covers Claude Code (CLAUDE.md), Cursor (.cursorrules), and GitHub Copilot. The prompt collections and workflow recipes work with any AI coding assistant. The principles transfer across tools.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I get updates when new AI tools come out?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">Pro and Team plans include lifetime updates at no additional cost. When AI tools release new features or configuration options, we update PromptKit and you get access automatically. Starter plan includes the current version only.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I customize the templates?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">Absolutely. That is the whole point. Every template is designed to be a starting point. Fork it, tweak it, make it yours. The templates include inline comments explaining what each section does and when to modify it.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          What if it does not work for me?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">We offer a 30-day money-back guarantee. If PromptKit does not improve your AI coding workflow, email us and we will refund you, no questions asked.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Is the Team license per-seat?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">The Team plan covers up to 10 developers for a single $99 payment. Need more seats? Contact us for custom pricing. There is no per-seat recurring fee.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">Twitter</a>
+      <a href="#">GitHub</a>
+      <a href="mailto:hello@promptkit.dev">Contact</a>
+      <a href="#">Terms</a>
+    </div>
+    <p>&copy; 2026 PromptKit. Built with zero frameworks and maximum intent.</p>
+  </div>
+</footer>
+
+<script>
+  // Preview tabs
+  document.querySelectorAll('.preview-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const idx = tab.dataset.tab;
+      document.querySelectorAll('.preview-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.preview-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.preview-content[data-tab="${idx}"]`).classList.add('active');
+      const names = ['CLAUDE.md', '.cursorrules', 'debug-workflow.md'];
+      document.getElementById('preview-filename').textContent = names[idx];
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelector('.nav-links').classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
