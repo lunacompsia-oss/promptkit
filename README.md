@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Release](https://img.shields.io/github/v/release/M3phist0s/promptkit?include_prereleases&label=release)](https://github.com/M3phist0s/promptkit/releases)
 [![GitHub Stars](https://img.shields.io/github/stars/M3phist0s/promptkit?style=social)](https://github.com/M3phist0s/promptkit)
+[![AI Ready](https://img.shields.io/badge/AI%20Ready-Score%20Your%20Repo-purple?style=flat)](https://github.com/M3phist0s/ai-ready)
 
 **Stop writing the same CLAUDE.md from scratch every project.** PromptKit gives you battle-tested `CLAUDE.md` templates, `.cursorrules` files, code review prompts, and step-by-step workflows that make Claude Code, Cursor, and Copilot dramatically more useful -- out of the box.
 
