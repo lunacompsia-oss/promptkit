@@ -11,8 +11,8 @@
   <meta property="og:title" content="PromptKit — Premium AI Coding Prompt Library">
   <meta property="og:description" content="Curated CLAUDE.md templates, .cursorrules files, workflow recipes. Ship better code with AI coding tools.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://promptkit.dev">
-  <meta property="og:image" content="https://promptkit.dev/og-image.png">
+  <meta property="og:url" content="https://m3phist0s.github.io/promptkit">
+  <meta property="og:image" content="https://m3phist0s.github.io/promptkit/og-image.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -21,8 +21,6 @@
 
   <!-- Favicon: code bracket icon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230f172a'/><text x='50' y='68' font-size='52' font-family='monospace' font-weight='bold' fill='%2306b6d4' text-anchor='middle'>&lt;/&gt;</text></svg>">
-
-  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -282,7 +280,7 @@
     /* ---- Pricing ---- */
     .pricing { background: var(--bg-secondary); }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
       align-items: start;
     }
     .pricing-card {
@@ -336,6 +334,18 @@
       text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 0.85rem;
     }
 
+    /* ---- Notify ---- */
+    .notify { padding: 64px 0; }
+    .notify-card {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius);
+      padding: 48px;
+      text-align: center;
+    }
+    .notify-card h2 { font-size: 1.75rem; margin-bottom: 12px; }
+    .notify-card p { color: var(--text-secondary); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
     /* ---- FAQ ---- */
     .faq-list { max-width: 720px; margin: 0 auto; }
     .faq-item {
@@ -367,6 +377,11 @@
     footer a:hover { text-decoration: underline; }
     .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
 
+    /* ---- Tablet ---- */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ---- Mobile ---- */
     @media (max-width: 768px) {
       section { padding: 64px 0; }
@@ -379,7 +394,7 @@
       .nav-mobile-toggle { display: block; font-size: 1.5rem; }
       .problem-grid { grid-template-columns: 1fr; gap: 40px; }
       .included-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto !important; }
       .hero-stats { gap: 32px; }
       .hero-buttons { flex-direction: column; align-items: center; }
     }
@@ -409,11 +424,11 @@
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">New: Claude Code CLAUDE.md templates for 2026</div>
+    <div class="hero-badge">Launch Special: Download Free Sample Pack</div>
     <h1>Stop Guessing.<br>Start Prompting Like a Pro.</h1>
     <p>Premium CLAUDE.md templates, .cursorrules files, and workflow recipes that turn AI coding tools into 10x multipliers. Built by developers who run an entire company with AI agents.</p>
     <div class="hero-buttons">
-      <a href="#pricing" class="btn btn-primary">Get PromptKit &mdash; from $19</a>
+      <a href="https://github.com/M3phist0s/promptkit/tree/main/free-sample" class="btn btn-primary" target="_blank" rel="noopener">Download Free Sample</a>
       <a href="#preview" class="btn btn-secondary">See Sample Prompts</a>
     </div>
     <div class="hero-stats">
@@ -671,6 +686,19 @@ the final diff and a one-line commit message."
       <p class="section-subtitle">Pay once, use forever. Every plan includes instant access to all files via download.</p>
     </div>
     <div class="pricing-grid">
+      <!-- Free Sample -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Free Sample</div>
+        <div class="pricing-price"><sup>$</sup>0</div>
+        <div class="pricing-desc">Try before you buy</div>
+        <ul class="pricing-features">
+          <li>5 code review prompts</li>
+          <li>1 CLAUDE.md template (SaaS)</li>
+          <li>1 .cursorrules file (React/TS)</li>
+          <li>Zero-to-SaaS workflow preview</li>
+        </ul>
+        <a href="https://github.com/M3phist0s/promptkit/tree/main/free-sample" class="pricing-btn pricing-btn-primary" target="_blank" rel="noopener">Download Free</a>
+      </div>
       <!-- Starter -->
       <div class="pricing-card">
         <div class="pricing-tier">Starter</div>
@@ -683,7 +711,7 @@ the final diff and a one-line commit message."
           <li>Quick-reference cheat sheets</li>
           <li>Markdown + plain text formats</li>
         </ul>
-        <a href="#" class="pricing-btn pricing-btn-secondary lemonsqueezy-button">Get Starter</a>
+        <a href="https://github.com/M3phist0s/promptkit" class="pricing-btn pricing-btn-secondary" target="_blank" rel="noopener">Coming Soon — Star to Get Notified</a>
       </div>
       <!-- Pro -->
       <div class="pricing-card popular">
@@ -698,7 +726,7 @@ the final diff and a one-line commit message."
           <li>All 6 cheat sheets</li>
           <li>Lifetime updates included</li>
         </ul>
-        <a href="#" class="pricing-btn pricing-btn-primary lemonsqueezy-button">Get Pro</a>
+        <a href="https://github.com/M3phist0s/promptkit" class="pricing-btn pricing-btn-primary" target="_blank" rel="noopener">Coming Soon — Star to Get Notified</a>
       </div>
       <!-- Team -->
       <div class="pricing-card">
@@ -713,10 +741,21 @@ the final diff and a one-line commit message."
           <li>Priority access to new content</li>
           <li>Lifetime updates included</li>
         </ul>
-        <a href="#" class="pricing-btn pricing-btn-secondary lemonsqueezy-button">Get Team</a>
+        <a href="https://github.com/M3phist0s/promptkit" class="pricing-btn pricing-btn-secondary" target="_blank" rel="noopener">Coming Soon — Star to Get Notified</a>
       </div>
     </div>
-    <p class="pricing-note">Secure payment via LemonSqueezy. Instant download after purchase. 30-day money-back guarantee.</p>
+    <p class="pricing-note">Free sample available now. Full kit launching soon. Star the repo to get notified when payment goes live.</p>
+  </div>
+</section>
+
+<!-- Notify -->
+<section class="notify" id="notify">
+  <div class="container">
+    <div class="notify-card">
+      <h2>Get Notified When the Full Kit Launches</h2>
+      <p>Star the repo on GitHub and you'll be the first to know when paid tiers go live.</p>
+      <a href="https://github.com/M3phist0s/promptkit" class="btn btn-primary" target="_blank" rel="noopener">Star on GitHub</a>
+    </div>
   </div>
 </section>
 
@@ -779,7 +818,7 @@ the final diff and a one-line commit message."
   <div class="container">
     <div class="footer-links">
       <a href="#">Twitter</a>
-      <a href="#">GitHub</a>
+      <a href="https://github.com/M3phist0s/promptkit" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:hello@promptkit.dev">Contact</a>
       <a href="#">Terms</a>
     </div>
